@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class ControlledBee : MonoBehaviour
 {
-    [SerializeField] private float minVelocity = 5;
-    [SerializeField] private float maxVelocity = 20;
-    [SerializeField] private float randomness = 1;
+    [SerializeField] private float moveSpeed = 20;
     [SerializeField] private float minimumDistance = 20f;
+    
+    [SerializeField] private float randomness = 5f;
+    [SerializeField] private Vector2  randomnessVector;
 
     private Rigidbody2D _rb;
     private static List<Rigidbody2D> EnemyRBs;
@@ -19,26 +21,23 @@ public class ControlledBee : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-
-        if (EnemyRBs == null)
-        {
-            EnemyRBs = new List<Rigidbody2D>();
-        }
-        EnemyRBs.Add(_rb);
+        // minimumDistance = Random.Range(minimumDistance, minimumDistance + randomness);
+        moveSpeed = Random.Range(moveSpeed, moveSpeed + 0.25f);
     }
 
     private void FixedUpdate()
     {
         if (_isControlled)
         {
-            // transform.right = _beeMovement.transform.position - transform.position;
-            if (Vector3.Distance(_beeMovement.transform.position, transform.position) > minimumDistance)
+            // // transform.right = _beeMovement.transform.position - transform.position;
+            if (Vector3.Distance(transform.position, _beeMovement.transform.position) > minimumDistance)
             {
-                _rb.MovePosition(_beeMovement.transform.position);
+                Vector2 movePosition = Vector2.MoveTowards(transform.position, (Vector2)_beeMovement.transform.position, moveSpeed * Time.deltaTime);
+                _rb.MovePosition(movePosition);
             }
         }
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
