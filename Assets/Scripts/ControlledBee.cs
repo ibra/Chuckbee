@@ -1,38 +1,44 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class ControlledBee : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 20f;
+    [SerializeField] private float minVelocity = 5;
+    [SerializeField] private float maxVelocity = 20;
+    [SerializeField] private float randomness = 1;
+    [SerializeField] private float minimumDistance = 20f;
+
+    private Rigidbody2D _rb;
+    private static List<Rigidbody2D> EnemyRBs;
     
     private BeeMovement _beeMovement;
     private bool _isControlled;
-    
 
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody2D>();
 
-    private void Update()
+        if (EnemyRBs == null)
+        {
+            EnemyRBs = new List<Rigidbody2D>();
+        }
+        EnemyRBs.Add(_rb);
+    }
+
+    private void FixedUpdate()
     {
         if (_isControlled)
         {
-            Vector3 lookAt = _beeMovement.transform.position;
-            lookAt.y = transform.position.y;
-            transform.LookAt(lookAt);
-            
-            if (Vector3.Distance(transform.position, _beeMovement.transform.position) >= MinDist)
+            // transform.right = _beeMovement.transform.position - transform.position;
+            if (Vector3.Distance(_beeMovement.transform.position, transform.position) > minimumDistance)
             {
-                transform.forward * (moveSpeed * Time.deltaTime);
-
-
-                if (Vector3.Distance(transform.position, _beeMovement.transform.position) <= MaxDist)
-                {
-                    // Epic Stuff(?)
-                }
-
+                _rb.MovePosition(_beeMovement.transform.position);
             }
         }
     }
-
-    // Update is called once per frame
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -42,5 +48,10 @@ public class ControlledBee : MonoBehaviour
             _beeMovement.ControlledBees.Add(this);
             _isControlled = true;
         }
+    }
+    
+    private void OnDestroy()
+    {
+        EnemyRBs.Remove(_rb);
     }
 }
