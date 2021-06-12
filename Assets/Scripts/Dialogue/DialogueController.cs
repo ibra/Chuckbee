@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 
@@ -6,6 +7,7 @@ public class DialogueController : MonoBehaviour
 {
     [TextArea(0,2)]
     [SerializeField] private string[] sentences;
+    private int _index;
 
     [SerializeField] private Sprite dialogueHint;
     [SerializeField] private Sprite dialogueBox;
@@ -16,13 +18,25 @@ public class DialogueController : MonoBehaviour
     {
         spriteRenderer.sprite = dialogueHint;
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+        {
+            // 3 sentences and our index is less than 3
+            if (_index >= sentences.Length - 1) return;
+            _index++;
+            spriteRenderer.sprite = dialogueBox;
+            dialogueText.text = sentences[_index];
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             spriteRenderer.sprite = dialogueBox;
-            dialogueText.text = sentences[0];
+            dialogueText.text = sentences[_index];
         }
     }
 
@@ -30,8 +44,10 @@ public class DialogueController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            spriteRenderer.sprite = dialogueBox;
-            dialogueText.text = sentences[0];
+            if (_index < sentences.Length - 1 && _index != 0) return;
+            dialogueText.text = string.Empty;
+            _index = 0;
+            spriteRenderer.sprite = dialogueHint;
         }
     }
 }
