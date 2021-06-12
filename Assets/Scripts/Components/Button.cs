@@ -23,9 +23,9 @@ public class Button : MonoBehaviour, IInteractable
       
     }
 
-    public void Interact()
+    public void Interact(GameObject interacter)
     {
-      OnBulletEnter.Invoke();
+        OnBulletEnter.Invoke();
     }
 }
 }

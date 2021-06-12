@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class DialogueController : MonoBehaviour
@@ -15,9 +16,12 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    [SerializeField] private UnityEvent OnDialogueEnd;
+
     private void Start()
     {
         spriteRenderer.sprite = dialogueHint;
+        OnDialogueEnd ??= new UnityEvent();
     }
 
     private void Update()

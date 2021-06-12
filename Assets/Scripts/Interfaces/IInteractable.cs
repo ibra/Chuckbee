@@ -1,7 +1,9 @@
-﻿namespace BeeGame.Interfaces
+﻿using UnityEngine;
+
+namespace BeeGame.Interfaces
 {
     public interface IInteractable
     {
-        void Interact();
+        void Interact(GameObject interacter);
     }
 }

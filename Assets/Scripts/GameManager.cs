@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,7 +8,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => _instance;
 
     public float Pollen { get; set; }
+    public float RequiredPollen { get; set; }
 
+    [SerializeField] private Image nectarBar;
+
+    public float PollenNormalized()
+    {
+       return Pollen / RequiredPollen;
+    }
+    
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -18,14 +27,9 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(_instance);
         }
     }
-    
-    private void Start()
-    {
-        
-    }        
-    
+
     private void Update()
     {
-        
+        nectarBar.fillAmount = PollenNormalized();
     }
 }
