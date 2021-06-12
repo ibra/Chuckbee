@@ -1,33 +1,23 @@
-﻿using UnityEngine;
+﻿using BeeGame.Interfaces;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace BeeGame.Components
 {
-public class Button : MonoBehaviour
+public class Button : MonoBehaviour, IInteractable
 {
     [SerializeField] private UnityEvent OnBulletEnter;
     [SerializeField] private UnityEvent OnPlayerEnter;
-    private UnityEvent OnPlayerExit;
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void Awake()
     {
-        switch (other.tag)
-        {
-            case "Bullet":
-                other.transform.GetComponent<Rigidbody2D>().isKinematic = true;
-                OnBulletEnter.Invoke();
-                break;
-            case "Player":
-                OnPlayerEnter.Invoke();
-                break;
-        }
+        OnPlayerEnter = new UnityEvent();
+        OnBulletEnter = new UnityEvent();
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    public void Interact()
     {
-        if (other.tag == "Player")
-        {
-            OnPlayerExit.Invoke();
-        }
+      OnBulletEnter.Invoke();
     }
 }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using BeeGame;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -21,7 +22,7 @@ public class BeeShooting : MonoBehaviour
 
     private void Update()
     {
-        if (_beeMovement.ControlledBees.Count == 0) return;
+        if (_beeMovement.ControlledBees.Count == 0 && _positionOccupied == false) return; 
         
         if (Input.GetMouseButtonDown(0) && !_positionOccupied)
         {
@@ -41,11 +42,9 @@ public class BeeShooting : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(0) && _positionOccupied)
         {
-            Rigidbody2D controlledRigidbody = _controlledBee.GetComponent<Rigidbody2D>();
-            controlledRigidbody.isKinematic = false;
-            controlledRigidbody.AddForce(shootPoint.right * shootForce);
-            _controlledBee.transform.parent = null;
-            Destroy(_controlledBee, 5f);
+            BeeBullet bulletInstance =  _controlledBee.GetComponent<BeeBullet>();
+            bulletInstance.enabled = true;
+            bulletInstance.ShootBullet(shootPoint, shootForce, 5f); ;
             _positionOccupied = false;
         }
 

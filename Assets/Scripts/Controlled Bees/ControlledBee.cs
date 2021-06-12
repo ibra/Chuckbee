@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using BeeGame;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BeeBullet))]
 public class ControlledBee : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 20;
@@ -23,6 +25,7 @@ public class ControlledBee : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        GetComponent<BeeBullet>().enabled = false;
         if (EnemyRBs == null)
         {
             EnemyRBs = new List<Rigidbody2D>();
