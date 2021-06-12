@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class DialogueController : MonoBehaviour
 {
-    [TextArea(0,2)]
-    [SerializeField] private string[] sentences;
+    [SerializeField] private bool forceIdle;
+    
+    [TextArea(0, 2)] [SerializeField] private string[] sentences;
     private int _index;
 
     [SerializeField] private Sprite dialogueHint;
@@ -50,4 +51,10 @@ public class DialogueController : MonoBehaviour
             spriteRenderer.sprite = dialogueHint;
         }
     }
+
+    public void ForcePlayerIdle(BeeMovement _beeMovement)
+    {
+        _beeMovement.enabled = false;
+    }
+
 }
