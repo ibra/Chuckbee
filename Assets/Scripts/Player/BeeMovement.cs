@@ -27,7 +27,7 @@ public class BeeMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //Movement
-        _rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) *
+        _rb.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) *
                        (moveSpeed * Time.fixedDeltaTime);
         
         //Rotation
