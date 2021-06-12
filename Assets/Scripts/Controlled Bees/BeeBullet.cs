@@ -1,4 +1,5 @@
-﻿using BeeGame.Interfaces;
+﻿using System;
+using BeeGame.Interfaces;
 using UnityEngine;
 
 namespace BeeGame
@@ -16,6 +17,7 @@ namespace BeeGame
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            Debug.Log($"{other.gameObject.layer} | {other.gameObject.name}");
             if (other.gameObject.layer == 8 )
             {
                 other.GetComponent<IInteractable>().Interact();

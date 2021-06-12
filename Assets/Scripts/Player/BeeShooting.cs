@@ -42,7 +42,7 @@ public class BeeShooting : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(0) && _positionOccupied)
         {
-            BeeBullet bulletInstance =  _controlledBee.GetComponent<BeeBullet>();
+            BeeBullet bulletInstance = _controlledBee.gameObject.AddComponent<BeeBullet>();
             bulletInstance.enabled = true;
             bulletInstance.ShootBullet(shootPoint, shootForce, 5f); ;
             _positionOccupied = false;

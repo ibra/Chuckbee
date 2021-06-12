@@ -11,8 +11,16 @@ public class Button : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        OnPlayerEnter = new UnityEvent();
-        OnBulletEnter = new UnityEvent();
+        if (OnPlayerEnter == null)
+        {
+            OnPlayerEnter = new UnityEvent();
+        }
+
+        if (OnBulletEnter == null)
+        {
+            OnBulletEnter = new UnityEvent();
+        }
+      
     }
 
     public void Interact()
