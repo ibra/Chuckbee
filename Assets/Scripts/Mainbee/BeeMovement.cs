@@ -1,18 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BeeMovement : MonoBehaviour
 {
     public List<ControlledBee> ControlledBees;
     
-    [SerializeField] private Camera _camera;
     private Rigidbody2D _rb;
+    
+    [SerializeField] private Camera _camera;
     [SerializeField] private float moveSpeed = 25f;
 
-    // Start is called before the first frame update
+    [SerializeField] private TextMeshProUGUI beesCollectedText;
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        beesCollectedText.text = ControlledBees.Count.ToString();
     }
 
     private void FixedUpdate()
