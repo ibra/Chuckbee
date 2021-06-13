@@ -1,5 +1,4 @@
-﻿using System;
-using BeeGame.Interfaces;
+﻿using BeeGame.Interfaces;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -11,11 +10,20 @@ namespace Components
         [SerializeField] private Transform openPoint;
         [SerializeField] private TextMeshProUGUI counter;
         [SerializeField] private int requiredBees;
+        [SerializeField] private bool horizontal;
 
         private void Open()
         {
             counter.gameObject.SetActive(false);
-            transform.DOLocalMoveY(openPoint.transform.position.y, 2f);
+            if (!horizontal)
+            {
+                transform.DOLocalMoveY(openPoint.transform.position.y, 2f);
+            }
+            else
+            {
+                transform.DOLocalMoveX(openPoint.transform.position.x, 2f);
+            }
+            
         }
 
         public void Interact(GameObject interacter)
