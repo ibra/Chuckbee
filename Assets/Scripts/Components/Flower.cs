@@ -6,7 +6,7 @@ public class Flower : MonoBehaviour, IInteractable
     [SerializeField] private float additionAmount;
     public void Interact(GameObject interacter)
     {
-        GameManager.Instance.Pollen += additionAmount;
+        GameManager.Instance.Nectar += additionAmount;
         Destroy(interacter);
     }
 }

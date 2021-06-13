@@ -7,14 +7,14 @@ public class GameManager : MonoBehaviour
     
     public static GameManager Instance => _instance;
 
-    public float Pollen { get; set; }
+    public float Nectar { get; set; }
     public float RequiredPollen { get; set; }
 
     [SerializeField] private Image nectarBar;
 
     public float PollenNormalized()
     {
-       return Pollen / RequiredPollen;
+       return Nectar / RequiredPollen;
     }
     
     private void Awake()
