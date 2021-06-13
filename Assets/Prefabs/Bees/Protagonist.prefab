@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 1458838891}
-  shootForce: 40
+  shootForce: 10
 --- !u!50 &1638202378436507818
 Rigidbody2D:
   serializedVersion: 4
@@ -233,7 +233,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.004801333, y: -0.024349645}
+  m_Offset: {x: 0.016536236, y: 0.002619326}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -244,5 +244,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3108992, y: 0.2512254}
+  m_Size: {x: 0.7851348, y: 0.93755877}
   m_EdgeRadius: 0

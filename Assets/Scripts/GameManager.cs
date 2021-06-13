@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     public float RequiredPollen { get; set; }
 
     [SerializeField] private Image nectarBar;
+    [SerializeField] private TextMeshProUGUI successText;
 
     private float PollenNormalized()
     {
@@ -25,19 +27,31 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         } else {
             _instance = this;
-            DontDestroyOnLoad(_instance);
         }
     }
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0) Destroy(gameObject);
-
+        
         if (Input.GetKey(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        nectarBar.transform.parent.gameObject.SetActive(PollenNormalized() != 0f);
+
+        if (PollenNormalized() == 1f)
+        {
+            nectarBar.transform.parent.gameObject.SetActive(true);
+            successText.gameObject.SetActive(true);
+        }
+        else if (PollenNormalized() == 0f)
+        {
+            nectarBar.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            nectarBar.transform.parent.gameObject.SetActive(true);
+        }
+
         nectarBar.fillAmount = PollenNormalized();
     }
 }

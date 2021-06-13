@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Queen : MonoBehaviour
 {
     [SerializeField] private float requiredPollen;
-    [SerializeField] private GameObject epicPanel;
+    [FormerlySerializedAs("epicPanel")] [SerializeField] private GameObject winPanel;
 
     private void Awake()
     {
@@ -24,8 +25,8 @@ public class Queen : MonoBehaviour
             }
             else
             {
-                epicPanel.SetActive(true);
-                TextMeshProUGUI nectarText = epicPanel.transform.Find("nectarAmount").GetComponent<TextMeshProUGUI>();
+                winPanel.SetActive(true);
+                TextMeshProUGUI nectarText = winPanel.transform.Find("nectarAmount").GetComponent<TextMeshProUGUI>();
                 nectarText.text =
                     $"<color=yellow>{GameManager.Instance.Nectar}ml</color> of nectar!";
                 

@@ -42,8 +42,13 @@ public class ControlledBee : MonoBehaviour
             if (Vector3.Distance(transform.position, _beeMovement.transform.position) > minimumDistance)
             {
                 Vector2 newPos = MoveRegular(direction);
-                newPos -= _rb.position;
+                newPos -= _rb.position; 
                 _rb.AddForce(newPos, ForceMode2D.Force);
+                _rb.velocity = Vector2.ClampMagnitude(_rb.velocity, moveSpeed);
+            }
+            else
+            {
+                _rb.velocity = Vector2.zero;
             }
         }
     }
@@ -79,7 +84,7 @@ public class ControlledBee : MonoBehaviour
             }
         }
 
-        Vector2 newPos = transform.position + transform.right * (Time.fixedDeltaTime * (moveSpeed  * 2));
+        Vector2 newPos = transform.position + transform.right * (Time.fixedDeltaTime * (moveSpeed));
         newPos += repelForce * (Time.fixedDeltaTime * repelAmount);
 
         return newPos;

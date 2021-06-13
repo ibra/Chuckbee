@@ -1,5 +1,4 @@
-﻿using System;
-using BeeGame.Interfaces;
+﻿using BeeGame.Interfaces;
 using UnityEngine;
 
 namespace BeeGame
@@ -10,8 +9,12 @@ namespace BeeGame
         {
             Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
             rigidbody.isKinematic = false;
-            rigidbody.AddForce(new Vector2(shootForce,0), ForceMode2D.Impulse);
-            
+            Vector2 target = Camera.main.ScreenToWorldPoint( Input.mousePosition );
+
+            Vector2 direction = target - (Vector2)transform.position;
+            direction.Normalize();
+            rigidbody.velocity = direction * shootForce;
+
             transform.parent = null;
             Destroy(gameObject, destroyTime);
         }

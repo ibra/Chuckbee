@@ -34,7 +34,7 @@ public class BeeShooting : MonoBehaviour
             _controlledBee.GetComponent<Rigidbody2D>().isKinematic = true;
 
             _controlledBee.transform.position = shootPoint.transform.position;
-            _controlledBee.transform.eulerAngles = Vector3.zero;
+            _controlledBee.transform.eulerAngles = shootPoint.eulerAngles;    
             _controlledBee.transform.parent = shootPoint.transform;
             
             _positionOccupied = true;
