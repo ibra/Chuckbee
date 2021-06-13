@@ -17,6 +17,8 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     [SerializeField] private UnityEvent OnDialogueEnd;
+    
+    private BeeMovement _beeMovement;
 
     private void Start()
     {
@@ -29,7 +31,12 @@ public class DialogueController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
         {
             // 3 sentences and our index is less than 3
-            if (_index >= sentences.Length - 1) return;
+            if (_index >= sentences.Length - 1)
+            {
+                if (forceIdle) ForcePlayerIdle(_beeMovement, false);
+                forceIdle = false;
+                return;
+            }
             _index++;
             spriteRenderer.sprite = dialogueBox;
             dialogueText.text = sentences[_index];
@@ -42,6 +49,9 @@ public class DialogueController : MonoBehaviour
         {
             spriteRenderer.sprite = dialogueBox;
             dialogueText.text = sentences[_index];
+            _beeMovement = other.GetComponent<BeeMovement>();
+            if (forceIdle) ForcePlayerIdle(_beeMovement, true);
+
         }
     }
 
@@ -56,9 +66,9 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    public void ForcePlayerIdle(BeeMovement _beeMovement)
+    public void ForcePlayerIdle(BeeMovement beeMovement, bool enable)
     {
-        _beeMovement.enabled = false;
+        beeMovement.ForceIdle = enable;
     }
 
 }

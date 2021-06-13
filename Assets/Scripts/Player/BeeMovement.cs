@@ -13,7 +13,8 @@ public class BeeMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 25f;
 
     [SerializeField] private TextMeshProUGUI beesCollectedText;
-    
+    public bool ForceIdle {get; set;}
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -26,15 +27,30 @@ public class BeeMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Movement
-        _rb.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) *
-                       (moveSpeed * Time.fixedDeltaTime);
-        
-        //Rotation
+        if (!ForceIdle)
+        {
+            HandleMovement();
+        }
+        else
+        {
+            _rb.velocity = Vector2.zero;
+        }
+      
+        HandleRotation();
+    }
+
+    private void HandleRotation()
+    {
         Vector2 inputPos = _camera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 lookDir = inputPos - _rb.position;
         float angleOffset = 0f;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - angleOffset;
         _rb.rotation = angle;
+    }
+
+    private void HandleMovement()
+    {
+        _rb.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) *
+                       (moveSpeed * Time.fixedDeltaTime);
     }
 }
