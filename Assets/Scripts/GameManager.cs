@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Image nectarBar;
 
-    public float PollenNormalized()
+    private float PollenNormalized()
     {
        return Nectar / RequiredPollen;
     }
@@ -30,6 +31,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0) Destroy(gameObject);
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        nectarBar.transform.parent.gameObject.SetActive(PollenNormalized() != 0f);
         nectarBar.fillAmount = PollenNormalized();
     }
 }

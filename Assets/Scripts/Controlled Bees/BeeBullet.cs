@@ -10,7 +10,8 @@ namespace BeeGame
         {
             Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
             rigidbody.isKinematic = false;
-            rigidbody.AddForce(shootPoint.right * shootForce);
+            rigidbody.AddForce(new Vector2(shootForce,0), ForceMode2D.Impulse);
+            
             transform.parent = null;
             Destroy(gameObject, destroyTime);
         }

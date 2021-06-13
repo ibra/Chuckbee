@@ -24,10 +24,7 @@ public class ControlledBee : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        if (EnemyRBs == null)
-        {
-            EnemyRBs = new List<Rigidbody2D>();
-        }
+        EnemyRBs ??= new List<Rigidbody2D>();
         EnemyRBs.Add(_rb);
         
         moveSpeed = Random.Range(moveSpeed, moveSpeed + 0.1f);
@@ -46,10 +43,7 @@ public class ControlledBee : MonoBehaviour
             {
                 Vector2 newPos = MoveRegular(direction);
                 newPos -= _rb.position;
-                if (_rb.velocity.magnitude < 8f)
-                {
-                    _rb.AddForce(newPos, ForceMode2D.Force);
-                }
+                _rb.AddForce(newPos, ForceMode2D.Force);
             }
         }
     }
@@ -85,7 +79,7 @@ public class ControlledBee : MonoBehaviour
             }
         }
 
-        Vector2 newPos = transform.position + transform.right * (Time.fixedDeltaTime * moveSpeed);
+        Vector2 newPos = transform.position + transform.right * (Time.fixedDeltaTime * (moveSpeed  * 2));
         newPos += repelForce * (Time.fixedDeltaTime * repelAmount);
 
         return newPos;
