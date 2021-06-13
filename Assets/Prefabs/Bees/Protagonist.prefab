@@ -183,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ControlledBees: []
   _camera: {fileID: 0}
-  moveSpeed: 300
+  moveSpeed: 400
   beesCollectedText: {fileID: 0}
 --- !u!114 &486432964
 MonoBehaviour:
@@ -233,7 +233,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.016536236, y: 0.002619326}
+  m_Offset: {x: 0.018323898, y: 0.002619326}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -244,5 +244,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7851348, y: 0.93755877}
+  m_Size: {x: 0.44548607, y: 0.93755877}
   m_EdgeRadius: 0

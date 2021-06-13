@@ -99,7 +99,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 21.26
+  m_Mass: 20
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -146,10 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1aaa6386d3d5cc4599eb0a2f2f2c9fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 100
-  minimumDistance: 1.76
-  repelRange: 0.95
-  repelAmount: 0.33
+  moveSpeed: 1200
+  minimumDistance: 3.58
+  repelRange: 2.02
+  repelAmount: 1.12
 --- !u!95 &125952601
 Animator:
   serializedVersion: 3

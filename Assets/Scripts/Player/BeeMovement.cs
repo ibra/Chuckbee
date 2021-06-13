@@ -44,6 +44,7 @@ public class BeeMovement : MonoBehaviour
     private void HandleRotation()
     {
         Vector2 inputPos = _camera.ScreenToWorldPoint(Input.mousePosition);
+        transform.localScale = inputPos.x > transform.position.x ? new Vector2(transform.localScale.x, 4) : new Vector2(transform.localScale.x, -4);
 
         Vector2 lookDir = inputPos - _rb.position;
         float angleOffset = 0f;
